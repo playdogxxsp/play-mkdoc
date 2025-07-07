@@ -1,0 +1,873 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../codeview/">
+      
+      
+        <link rel="next" href="../%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95/bole/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>HTTP 接口开发规范 - My Docs Test</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#http" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Docs Test" class="md-header__button md-logo" aria-label="My Docs Test" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Docs Test
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HTTP 接口开发规范
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Docs Test" class="md-nav__button md-logo" aria-label="My Docs Test" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Docs Test
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    测试文档
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            测试文档
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../codeview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java 单元测试说明
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    HTTP 接口开发规范
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    HTTP 接口开发规范
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、注解的使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、注解的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-apioperation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 ApiOperation 注解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 多条件查询注解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 POST 提交数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 其他注解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、接口返回值规范
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#url" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、接口 URL 和请求方法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、分页规范
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    二级目录
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            二级目录
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95/bole/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    猿辅导伯乐奖制度（试行版）
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95/%E5%90%8E%E7%AB%AF%E8%A7%84%E8%8C%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    后端规范
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、注解的使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、注解的使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-apioperation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 ApiOperation 注解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 多条件查询注解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 POST 提交数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 其他注解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、接口返回值规范
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#url" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、接口 URL 和请求方法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、分页规范
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="http">HTTP 接口开发规范</h1>
+<blockquote>
+<p>本规范旨在规范 http 接口的开发，方便前后端接口的交互，提高开发效率和接口的后续维护。</p>
+</blockquote>
+<hr />
+<h2 id="_1">一、注解的使用</h2>
+<p><strong>文中红色标记的注解或注解属性为强制要求。</strong></p>
+<h3 id="11-apioperation">1.1 ApiOperation 注解</h3>
+<ul>
+<li><strong>【强制】</strong> 每个 http 接口都必须使用 <code>@ApiOperation</code> 注解标记。</li>
+<li><code>value</code> 属性：简单说明接口的功能。</li>
+<li><code>notes</code> 属性：说明接口的访问权限、前端调用入口等信息。</li>
+<li><strong>【建议】</strong></li>
+<li>如果接口的调用处单一，可在 <code>value</code> 或 <code>notes</code> 中说明前端入口，格式：一级页面/二级页面/按钮。</li>
+<li>如果接口有多个调用处，可在 <code>notes</code> 中说明主要前端入口，其他调用处以 JavaDoc 注释形式维护在接口上方。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code class="language-java">@GetMapping(&quot;/listSubmitResumes&quot;)
+@ApiOperation(value = &quot;候选人管理页，查询列表&quot;, notes = &quot;适用于阶段：简历筛选、用人部门筛选、面试；数据操作权限：数据权限内的非辅导老师职位、简历负责人、offer负责人或超管&quot;)
+public Response&lt;CandidateManagePageVo&gt; listSubmitResumes(@ModelAttribute CandidateManageQueryCondition condition, HttpServletRequest request){
+    String ldap = getUsername(request);
+    return Response.success(candidateManageLogic.listSubmitResumes(condition, ldap));
+}
+</code></pre>
+<hr />
+<h3 id="12">1.2 多条件查询注解</h3>
+<ul>
+<li><strong>【强制】</strong> 多条件（条件数量≥3）查询接口，需将条件写到以 <code>Param</code> 结尾的类中，接口入参用 <code>@ModelAttribute</code> 注解标记。</li>
+<li><strong>【强制】</strong> <code>Param</code> 类上用 <code>@ApiModel</code> 注解标记，使用对象接收参数。</li>
+<li><strong>【强制】</strong> 类中每个查询条件用 <code>@ApiModelProperty</code> 注解标记。</li>
+<li><code>value</code> 属性：说明条件含义、取值范围、参数格式等。</li>
+<li><code>notes</code> 属性：补充后端专用信息。</li>
+<li><code>hidden=true</code>：不暴露给前端。</li>
+<li><code>required=true</code>：必传条件。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code class="language-java">@Data
+@ApiModel(&quot;候选人管理查询条件类&quot;)
+public class CandidateManageQueryParam {
+    @ApiModelProperty(&quot;查询的职位&quot;)
+    private List&lt;Integer&gt; queryPositionIds = null;
+    @ApiModelProperty(value = &quot;用户有权限的职位&quot;, hidden = true)
+    private List&lt;Integer&gt; authorizedPositionIds = null;
+    @ApiModelProperty(value = &quot;一级渠道&quot;, required = true)
+    private ChannelV2 channelV2 = null;
+    @ApiModelProperty(value = &quot;二级渠道；如果是全部，那么传空字符串&quot;)
+    private String secChannel = &quot;&quot;;
+    @ApiModelProperty(value = &quot;简历负责人, 格式：姓名ldap&quot;)
+    private String uploaderLdap = &quot;&quot;;
+    @ApiModelProperty(value = &quot;起始投递日期, 日期零点时间戳，毫秒&quot;)
+    private long applyFromDate = 0L;
+    @ApiModelProperty(value = &quot;终止投递日期, 日期零点时间戳，毫秒&quot;)
+    private long applyToDate = 0L;
+    @ApiModelProperty(value = &quot;候选人姓名&quot;, notes = &quot;模糊查找，最左匹配&quot;)
+    private String name = &quot;&quot;;
+    @ApiModelProperty(value = &quot;候选人电话&quot;, notes = &quot;完全匹配&quot;)
+    private String phone = &quot;&quot;;
+    @ApiModelProperty(value = &quot;当前阶段的状态，简历筛选：待筛选简历，用人部门筛选：待用人部门筛选，面试/待安排面试：待安排面试，面试/已安排：已安排面试，offer: 待发offer，入职/待入职：待入职，入职/已入职：已入职&quot;)
+    private SubmitResumeStatus currentStatus = null;
+    @ApiModelProperty(value = &quot;候选人状态&quot;, hidden = true)
+    private List&lt;SubmitResumeStatus&gt; statusList = null;
+    @ApiModelProperty(value = &quot;是否是超级管理员&quot;, hidden = true, notes = &quot;超级管理员不受简历负责人或offer负责人的限制，可以查看列表数据&quot;)
+    private boolean isSuperAdmin = false;
+}
+</code></pre>
+<hr />
+<h3 id="13-post">1.3 POST 提交数据</h3>
+<ul>
+<li><strong>【强制】</strong> 使用 POST 方法的接口提交数据时，使用对象类型，并用 <code>@RequestBody</code> 注解标记。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code class="language-java">@PostMapping(&quot;/createInterviewEvaluation&quot;)
+@ApiOperation(&quot;填写面试反馈&quot;)
+public Response createInterviewEvaluation(@RequestBody List&lt;RoundEvaluationVo&gt; roundEvaluationVo, HttpServletRequest request) {
+    String username = getUsername(request);
+    candidateManageInterviewLogic.createInterviewEvaluation(roundEvaluationVo, username);
+    return Response.success();
+}
+</code></pre>
+<hr />
+<h3 id="14">1.4 其他注解</h3>
+<ul>
+<li><strong>【强制】</strong> <code>@Api</code>：修饰整个类，描述 Controller 作用。</li>
+<li><strong>【强制】</strong> <code>@ApiParam</code>：单个参数描述。</li>
+<li>其他注解：<code>@ApiResponse</code>、<code>@ApiResponses</code>、<code>@ApiIgnore</code>、<code>@ApiError</code>、<code>@ApiImplicitParam</code>、<code>@ApiImplicitParams</code>。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code class="language-java">@GetMapping(&quot;/generateWechatJSSDKSignature&quot;)
+@ApiOperation(value = &quot;获取微信js-sdk签名&quot;, notes = &quot;对外接口，没有权限控制&quot;)
+public Response generateWechatJSSDKSignature(@RequestParam(&quot;url&quot;) String url, @ApiParam(&quot;公众号所属部门&quot;) @RequestParam(defaultValue = &quot;猿辅导&quot;) DepartmentEnum department){
+    // 返回给 c 端用户，屏蔽一些错误
+    try {
+        return Response.success(wechatLogic.generateWechatJSSDKSignature(url, department));
+    } catch (Throwable t) {
+        logger.error(&quot;get wechet signature error:&quot;, t);
+        throw new MsgRuntimeException(&quot;获取签名失败&quot;);
+    }
+}
+</code></pre>
+<hr />
+<h2 id="_2">二、接口返回值规范</h2>
+<ul>
+<li><strong>【强制】</strong> 所有 http 接口返回值使用带有泛型的 <code>Response</code> 类型，包含 <code>code</code>、<code>message</code> 和 <code>data</code> 部分。</li>
+<li>无返回值时，泛型用 <code>Void</code> 类型。</li>
+<li><strong>【强制】</strong> <code>code</code> 用于区分不同异常类型。</li>
+<li><strong>【强制】</strong> <code>message</code> 是异常时的错误描述信息。</li>
+<li><strong>【强制】</strong> <code>data</code> 是返回的数据内容。</li>
+<li><strong>【强制】</strong> <code>Response</code> 带泛型后，前端可通过 swagger 了解返回值格式和字段名称，避免联调时才知数据格式。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code class="language-json">{
+    &quot;code&quot;: 0,
+    &quot;message&quot;: &quot;&quot;,
+    &quot;data&quot;: {
+        // 具体数据
+    }
+}
+</code></pre>
+<hr />
+<h2 id="url">三、接口 URL 和请求方法</h2>
+<ul>
+<li><strong>【强制】</strong> 接口 URL 统一为 RPC 风格：<code>/系统名/模块名/接口方法名</code>，模块名不包含 Controller。</li>
+<li><strong>【强制】</strong> 同一 controller 类中不能使用方法重载，避免 URL 相同。</li>
+<li><strong>【强制】</strong> 方法名称使用动宾短语，动词范围见项目规范。</li>
+</ul>
+<p><strong>请求方法规范：</strong>
+- <code>GET</code>：获取数据，幂等，常用于查询。
+- <code>POST</code>：提交数据，非幂等，常用于创建。
+- <code>PUT</code>：上传数据，幂等，常用于更新。
+- <code>DELETE</code>：删除资源，幂等。
+- <code>HEAD</code>、<code>OPTIONS</code>、<code>PATCH</code>：根据实际功能和幂等性确定。</p>
+<p><strong>实际用法：</strong>
+- 查询数据：<code>GET</code>
+- 创建数据：<code>POST</code>
+- 修改数据：<code>PUT</code>
+- 逻辑删除（非幂等）：<code>POST</code>
+- 删除数据（幂等）：<code>DELETE</code></p>
+<p><strong>示例：</strong></p>
+<pre><code class="language-java">@RestController
+@RequestMapping(&quot;/candidateManage&quot;)
+@Api(&quot;候选人管理&quot;)
+public class CandidateManageController extends BaseController {
+    @Autowired
+    private CandidateManageLogic candidateManageLogic;
+    @GetMapping(&quot;/listSubmitResumes&quot;)
+    @ApiOperation(value = &quot;候选人管理页，查询列表&quot;, notes = &quot;适用于阶段：简历筛选、用人部门筛选、面试；数据操作权限：数据权限内的非辅导老师职位、简历负责人、offer负责人或超管&quot;)
+    public Response&lt;CandidateManagePageVo&gt; listSubmitResumes(@ModelAttribute CandidateManageQueryCondition condition, HttpServletRequest request){
+        String ldap = getUsername(request);
+        return Response.success(candidateManageLogic.listSubmitResumes(condition, ldap));
+    }
+}
+</code></pre>
+<hr />
+<h2 id="_3">四、分页规范</h2>
+<ul>
+<li><strong>【强制】</strong> 分页请求继承 <code>ep-commons</code> 中的 <code>PageParam</code>。</li>
+<li><strong>【强制】</strong> 分页返回使用 <code>ep-commons</code> 中的 <code>PageData&lt;T&gt;</code> 作为返回类型。</li>
+</ul>
+<p><strong>请求示例：</strong></p>
+<pre><code class="language-json">{
+    &quot;condition1&quot;: &quot;&quot;,
+    &quot;condition2&quot;: 2,
+    &quot;pageNo&quot;: 1,
+    &quot;pageSize&quot;: 20
+}
+</code></pre>
+<p><strong>返回示例：</strong></p>
+<pre><code class="language-json">{
+    &quot;code&quot;: 0,
+    &quot;message&quot;: &quot;&quot;,
+    &quot;data&quot;: {
+        &quot;count&quot;: 100,
+        &quot;list&quot;: [
+            { &quot;id&quot;: 1, &quot;name&quot;: &quot;test1&quot; },
+            { &quot;id&quot;: 2, &quot;name&quot;: &quot;test2&quot; }
+        ]
+    }
+}
+</code></pre>
+<hr />
+<p>如需补充其他细节，可根据实际项目需求扩展。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
