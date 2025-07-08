@@ -1,3 +1,7 @@
 site_name: My Docs Test
 theme:
     name: 'material'
+nav:
+  - Home主页: index.md          # 主页，对应 docs/index.md
+  - 工作空间1: 工作空间1/  # 子目录（含多个文档，会显示下拉菜单）
+  - 工作空间2: 工作空间2/         # 单文档页面
